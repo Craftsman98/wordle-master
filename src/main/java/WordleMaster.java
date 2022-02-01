@@ -1,4 +1,6 @@
 import java.io.*;
+import java.net.URI;
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,8 +14,7 @@ public class WordleMaster {
 
         List<Word> allWords = new ArrayList<>();
 
-        String filename = "/Users/zouhd/Documents/Programming/IdeaProjects/wordle-master/build/resources/main/wordle_words.txt";
-        File file = new File(filename);
+        File file = new File("src/main/resources/wordle_words.txt");
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
         BufferedReader bufferedReader = new BufferedReader(reader);
         String word = bufferedReader.readLine();
