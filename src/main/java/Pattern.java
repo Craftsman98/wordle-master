@@ -15,21 +15,28 @@ public class Pattern {
      */
     public int[] result(){
         String s = "";
-        boolean isNum = true;
-        this.pattern = new int[5];
-        while (s.length() != 5 || !isNum){
+        while (input(s) == null){
             System.out.println("输入单词判定结果：0为灰色，1为绿色，2为黄色。例如10120。");
             Scanner scanner = new Scanner(System.in);
             s = scanner.nextLine();
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) < '0' || s.charAt(i) > '2'){
-                    isNum = false;
-                    break;
-                }
-                pattern[i] = s.charAt(i) - '0';
-            }
         }
+        pattern = input(s);
+        return pattern;
+    }
 
+    public int[] input(String s){
+        if (s.length() != 5) return null;
+        int[] res = new int[5];
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) < '0' || s.charAt(i) > '2') {
+                return null;
+            }
+            res[i] = s.charAt(i) - '0';
+        }
+        return res;
+    }
+
+    public int[] getPattern() {
         return pattern;
     }
 }
