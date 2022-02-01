@@ -1,11 +1,19 @@
 public class Word {
-    private final char[] word;
+    private final String word;
 
     Word(String word){
-        this.word = word.toCharArray();
+        this.word = word;
     }
 
-    public char[] getWord(){
+    public boolean notInclude(char c){
+        return !word.contains(String.valueOf(c));
+    }
+
+    public boolean notLocate(char c, int i){
+        return word.contains(String.valueOf(c)) && word.charAt(i) != c;
+    }
+
+    public String getWord(){
         return this.word;
     }
 }
