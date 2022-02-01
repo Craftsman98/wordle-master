@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WordleMaster {
@@ -33,22 +30,39 @@ public class WordleMaster {
             for (int i = 0; i < res.length; i++) {
                 int finalI = i;
                 Word finalLastWord = lastWord;
-                switch (res[i]){
+                for (int j = 0; j < finalLastWord.getWord().length(); j++) {
+                    for (int k = j + 1; k < finalLastWord.getWord().length(); k++) {
+                        if (finalLastWord.getWord().charAt(j) == finalLastWord.getWord().charAt(k)){
+                            if (res[j] == 0 && res[k] != 0){
+                                res[j] = 3;
+                            }else if(res[j] != 0 && res[k] == 0){
+                                res[k] = 3;
+                            }
+                        }
+                    }
+                }
+                switch (res[i]) {
                     case 0:
-//                    int finalI = i;
                         hope = hope.stream().filter(w -> w.notInclude(finalLastWord.getWord().charAt(finalI))).collect(Collectors.toList());
                         break;
-                    case 1:
+                    case 2:
                         hope = hope.stream().filter(w -> w.getWord().charAt(finalI) == finalLastWord.getWord().charAt(finalI)).collect(Collectors.toList());
                         break;
-                    case 2:
+                    case 1:
                         hope = hope.stream().filter(w -> w.notLocate(finalLastWord.getWord().charAt(finalI), finalI)).collect(Collectors.toList());
                         break;
+                    default:
                 }
             }
-            lastWord = hope.get(0);
-            System.out.println(hope.get(0).getWord() + "  size: " + hope.size());
+            System.out.println("size: " + hope.size());
+            for (int i = 0; i < Math.min(10, hope.size()); i++) {
+                System.out.print(i + ". " + hope.get(i).getWord() + "  ");
+            }
+            System.out.println();
             if (hope.size() > 1) {
+                Scanner scanner = new Scanner(System.in);
+                lastWord = hope.get(Integer.parseInt(scanner.nextLine()));
+                System.out.println(lastWord.getWord());
                 res = pattern.result();
             }
         }

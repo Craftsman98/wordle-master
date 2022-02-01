@@ -16,7 +16,7 @@ public class Pattern {
     public int[] result(){
         String s = "";
         while (input(s) == null){
-            System.out.println("输入单词判定结果：0为灰色，1为绿色，2为黄色。例如10120。");
+            System.out.println("输入单词判定结果：0为灰色，1为黄色，2为绿色。例如10120。");
             Scanner scanner = new Scanner(System.in);
             s = scanner.nextLine();
         }
