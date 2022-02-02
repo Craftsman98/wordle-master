@@ -3,7 +3,7 @@
 ## 使用方法
 1. ```git clone git@github.com:Craftsman98/wordle-master.git```
 2. 运行
-3. 在Wordle中输入第一个单词`world`(默认第一个单词，可在代码中修改)
+3. 在Wordle中输入第一个单词(默认第一个单词是`abort`，会显示在console中。可在代码中修改)
 4. 将Wordle中的判定结果输入到console中。
    1. 0表示不包含改字母，即灰色。
    2. 1表示包含该字母，但是位置不正确，即黄色。
