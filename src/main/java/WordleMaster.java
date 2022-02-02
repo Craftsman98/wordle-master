@@ -1,17 +1,18 @@
 import java.io.*;
-import java.net.URI;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class WordleMaster {
     public static void main(String[] args) throws IOException {
-        Word lastWord = new Word("world");
-        String s = "";
+        // 默认第一个词，可自行修改
+        final String FIRST_WORD = "abort";
+        Word lastWord = new Word(FIRST_WORD);
+        System.out.println("欢迎使用 wordle-master ！请在Wordle游戏中输入第一个单词：" + FIRST_WORD);
         Pattern pattern = new Pattern();
+        // 输入Wordle结果
         int[] res = pattern.result();
 
-
+        // 读取所有的单词
         List<Word> allWords = new ArrayList<>();
 
         File file = new File("src/main/resources/wordle_words.txt");
@@ -26,11 +27,13 @@ public class WordleMaster {
         bufferedReader.close();
         reader.close();
 
+        // 符合条件的单词
         List<Word> hope = allWords;
         while (hope.size() > 1){
             for (int i = 0; i < res.length; i++) {
                 int finalI = i;
                 Word finalLastWord = lastWord;
+                // 如果出现单词中有两个相同字母的情况（如cheer)
                 for (int j = 0; j < finalLastWord.getWord().length(); j++) {
                     for (int k = j + 1; k < finalLastWord.getWord().length(); k++) {
                         if (finalLastWord.getWord().charAt(j) == finalLastWord.getWord().charAt(k)){
@@ -62,17 +65,17 @@ public class WordleMaster {
             System.out.println();
             if (hope.size() > 1) {
                 Scanner scanner = new Scanner(System.in);
-                lastWord = hope.get(Integer.parseInt(scanner.nextLine()));
+                int chose = Integer.MAX_VALUE;
+                while (chose > 9 || chose < 0) {
+                    System.out.println("请选择一个：");
+                    String s = scanner.nextLine();
+                    chose = s.length() == 1 ? Integer.parseInt(s) : Integer.MAX_VALUE;
+                }
+                lastWord = hope.get(chose);
                 System.out.println(lastWord.getWord());
                 res = pattern.result();
             }
         }
-
-
-
-
-        System.out.println(hope.size());
-
     }
 
 }
