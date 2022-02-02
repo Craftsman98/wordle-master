@@ -15,7 +15,7 @@ public class WordleMaster {
         // 读取所有的单词
         List<Word> allWords = new ArrayList<>();
 
-        File file = new File("src/main/resources/wordle_words.txt");
+        File file = new File("wordle_words.txt");
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
         BufferedReader bufferedReader = new BufferedReader(reader);
         String word = bufferedReader.readLine();
@@ -64,14 +64,18 @@ public class WordleMaster {
             }
             System.out.println();
             if (hope.size() > 1) {
-                Scanner scanner = new Scanner(System.in);
-                int chose = Integer.MAX_VALUE;
-                while (chose > 9 || chose < 0) {
-                    System.out.println("请选择一个：");
-                    String s = scanner.nextLine();
-                    chose = s.length() == 1 ? Integer.parseInt(s) : Integer.MAX_VALUE;
+                try (Scanner scanner = new Scanner(System.in)) {
+                    int chose = Integer.MAX_VALUE;
+                    while (chose > 9 || chose < 0) {
+                        System.out.println("请选择一个：");
+                        String s = scanner.nextLine();
+                        chose = s.length() == 1 ? Integer.parseInt(s) : Integer.MAX_VALUE;
+                    }
+                    lastWord = hope.get(chose);
+                } catch (NumberFormatException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-                lastWord = hope.get(chose);
                 System.out.println(lastWord.getWord());
                 res = pattern.result();
             }
