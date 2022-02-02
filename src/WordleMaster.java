@@ -1,3 +1,4 @@
+package src;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,18 +65,14 @@ public class WordleMaster {
             }
             System.out.println();
             if (hope.size() > 1) {
-                try (Scanner scanner = new Scanner(System.in)) {
-                    int chose = Integer.MAX_VALUE;
-                    while (chose > 9 || chose < 0) {
-                        System.out.println("请选择一个：");
-                        String s = scanner.nextLine();
-                        chose = s.length() == 1 ? Integer.parseInt(s) : Integer.MAX_VALUE;
-                    }
-                    lastWord = hope.get(chose);
-                } catch (NumberFormatException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                Scanner scanner = new Scanner(System.in);
+                int chose = Integer.MAX_VALUE;
+                while (chose > 9 || chose < 0) {
+                    System.out.println("请选择一个：");
+                    String s = scanner.nextLine();
+                    chose = s.length() == 1 ? Integer.parseInt(s) : Integer.MAX_VALUE;
                 }
+                lastWord = hope.get(chose);
                 System.out.println(lastWord.getWord());
                 res = pattern.result();
             }

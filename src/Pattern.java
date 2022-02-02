@@ -1,3 +1,4 @@
+package src;
 import java.util.Scanner;
 
 public class Pattern {
@@ -16,9 +17,8 @@ public class Pattern {
         String s = "";
         while (input(s) == null){
             System.out.println("输入单词判定结果：0为灰色，1为黄色，2为绿色。例如10120。");
-            try (Scanner scanner = new Scanner(System.in)) {
-                s = scanner.nextLine();
-            }
+            Scanner scanner = new Scanner(System.in);
+            s = scanner.nextLine();
         }
         pattern = input(s);
         return pattern;

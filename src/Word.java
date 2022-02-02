@@ -1,3 +1,4 @@
+package src;
 public class Word {
     private final String word;
 
