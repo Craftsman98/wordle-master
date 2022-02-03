@@ -6,9 +6,14 @@ import java.util.stream.Collectors;
 public class WordleMaster {
     public static void main(String[] args) throws IOException {
         // 默认第一个词，可自行修改
-        final String FIRST_WORD = "abort";
-        Word lastWord = new Word(FIRST_WORD);
-        System.out.println("欢迎使用 wordle-master ！请在Wordle游戏中输入第一个单词：" + FIRST_WORD);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("欢迎使用 wordle-master ！请在Wordle游戏中输入第一个单词：(默认使用abort作为初始词)");
+        String firstWord = sc.nextLine();
+        if (firstWord.equals("")){
+            firstWord = "abort";
+        }
+        Word lastWord = new Word(firstWord);
+        System.out.println("初始词为：" + firstWord);
         Pattern pattern = new Pattern();
         // 输入Wordle结果
         int[] res = pattern.result();
