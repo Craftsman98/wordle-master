@@ -17,4 +17,15 @@ public class Word {
     public String getWord(){
         return this.word;
     }
+    public boolean isValid() {
+        if (word.length() != 5) {
+            return false;
+        }
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) < 'a' || word.charAt(i) > 'z') {
+                return false;
+            }
+        }
+        return true;
+    }
 }

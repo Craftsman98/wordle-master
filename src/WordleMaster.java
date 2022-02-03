@@ -5,15 +5,19 @@ import java.util.stream.Collectors;
 
 public class WordleMaster {
     public static void main(String[] args) throws IOException {
-        // 默认第一个词，可自行修改
+        final String DEFAULT_FIRST_WORD = "abort";
         Scanner sc = new Scanner(System.in);
-        System.out.println("欢迎使用 wordle-master ！请在Wordle游戏中输入第一个单词：(默认使用abort作为初始词)");
-        String firstWord = sc.nextLine();
-        if (firstWord.equals("")){
-            firstWord = "abort";
+        System.out.println("欢迎使用 wordle-master ！请在Wordle游戏中输入第一个单词：(输入回车则默认使用abort作为初始词)");
+        Word lastWord = new Word(sc.nextLine());
+        while (!lastWord.isValid()) {
+            if (lastWord.getWord().equals("")) {
+                lastWord = new Word(DEFAULT_FIRST_WORD);
+                break;
+            }
+            System.out.println("请输入一个有效的单词！");
+            lastWord = new Word(sc.nextLine());
         }
-        Word lastWord = new Word(firstWord);
-        System.out.println("初始词为：" + firstWord);
+        System.out.println("初始词为：" + lastWord.getWord());
         Pattern pattern = new Pattern();
         // 输入Wordle结果
         int[] res = pattern.result();
