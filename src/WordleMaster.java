@@ -40,8 +40,10 @@ public class WordleMaster {
                         if (finalLastWord.getWord().charAt(j) == finalLastWord.getWord().charAt(k)){
                             if (res[j] == 0 && res[k] != 0){
                                 res[j] = 3;
+                                hope.remove(lastWord);
                             }else if(res[j] != 0 && res[k] == 0){
                                 res[k] = 3;
+                                hope.remove(lastWord);
                             }
                         }
                     }
